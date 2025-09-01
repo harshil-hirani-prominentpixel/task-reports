@@ -26,7 +26,6 @@ const ProductList: React.FC<ProductListProps> = ({ products = [] }) => {
     <div className='product-list-container'>
       <h2>Product List</h2>
 
-      {}
       <input
         type='text'
         placeholder='Search products...'
@@ -35,7 +34,6 @@ const ProductList: React.FC<ProductListProps> = ({ products = [] }) => {
         className='search-input'
       />
 
-      {}
       {filteredProducts.length > 0 ? (
         <ul className='product-list'>
           {filteredProducts.map((product) => (
