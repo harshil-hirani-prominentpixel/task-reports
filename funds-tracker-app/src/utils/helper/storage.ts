@@ -22,6 +22,6 @@ export function saveNotes(notes: Notes) {
   try {
     localStorage.setItem(KEY, JSON.stringify(notes));
   } catch {
-    // ignore storage errors
+    console.log("Please try again!, Not save the notes.");
   }
 }

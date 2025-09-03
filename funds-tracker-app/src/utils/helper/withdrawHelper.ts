@@ -7,7 +7,7 @@ export function withdrawAmount(amount: number, notes: Notes) {
 
   const memo = new Map<string, Notes | null>();
 
-  function dfs(
+  function findNotesCombination(
     index: number,
     remaining: number,
     available: Notes
@@ -26,7 +26,7 @@ export function withdrawAmount(amount: number, notes: Notes) {
         ...available,
         [note]: (available[note] || 0) - use,
       };
-      const result = dfs(index + 1, remaining - note * use, nextAvailable);
+      const result = findNotesCombination(index + 1, remaining - note * use, nextAvailable);
       if (result) {
         if (use > 0) result[note] = (result[note] || 0) + use;
         memo.set(key, result);
@@ -38,7 +38,7 @@ export function withdrawAmount(amount: number, notes: Notes) {
     return null;
   }
 
-  const withdrawn = dfs(0, amount, notes) || {};
+  const withdrawn = findNotesCombination(0, amount, notes) || {};
   const withdrawnTotal = Object.entries(withdrawn).reduce(
     (sum, [note, qty]) => sum + Number(note) * qty,
     0
