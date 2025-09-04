@@ -50,6 +50,18 @@ export default function NotesManager({ notes, setNotes }: Props) {
     }));
   };
 
+  const handleDecrement = (note: number) => {
+    setNotes((prev) => {
+      const updated = { ...prev };
+      if (updated[note] > 1) {
+        updated[note] -= 1;
+      } else {
+        delete updated[note]; 
+      }
+      return updated;
+    });
+  };
+
   const handleRemove = (note: number) => {
     const updated = { ...notes };
     delete updated[note];
@@ -58,7 +70,7 @@ export default function NotesManager({ notes, setNotes }: Props) {
 
   const sorted = Object.keys(notes)
     .map(Number)
-    .sort((a, b) => a - b);
+    .sort((a, b) => b - a); 
 
   return (
     <div className='card'>
@@ -110,6 +122,12 @@ export default function NotesManager({ notes, setNotes }: Props) {
                   onClick={() => handleIncrement(n)}
                 >
                   +
+                </button>
+                <button
+                  className='btn small warning'
+                  onClick={() => handleDecrement(n)}
+                >
+                  –
                 </button>
                 <button
                   className='btn small danger'

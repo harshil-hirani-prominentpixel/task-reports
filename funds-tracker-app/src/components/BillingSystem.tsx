@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { withdrawAmount } from "../utils/helper/withdrawHelper";
-import { type Notes } from "../types";
+import type { Notes } from "../types";
 
 interface Props {
   notes: Notes;
@@ -9,21 +9,15 @@ interface Props {
 
 export default function BillingSystem({ notes, setNotes }: Props) {
   const [showForm, setShowForm] = useState(false);
-
   const [givenAmount, setGivenAmount] = useState<number | "">("");
   const [billAmount, setBillAmount] = useState<number | "">("");
-
-  const [pendingResult, setPendingResult] = useState<{
-    withdrawn: Notes;
-    remaining: number;
-  }>();
 
   const [finalResult, setFinalResult] = useState<{
     withdrawn: Notes;
     remaining: number;
   }>();
 
-  const handleCalculate = () => {
+  const handleSettlement = () => {
     const given = Number(givenAmount);
     const bill = Number(billAmount);
 
@@ -38,48 +32,42 @@ export default function BillingSystem({ notes, setNotes }: Props) {
     }
 
     const change = given - bill;
+
     if (change < 0) {
       alert("Insufficient amount from customer.");
       return;
     }
 
-    const updatedNotes = {
-      ...notes,
-      [given]: (notes[given] || 0) + 1,
-    };
-    setNotes(updatedNotes);
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
-
-    const { withdrawn, remaining } = withdrawAmount(change, updatedNotes);
-
-    if (remaining > 0) {
-      console.warn("Not enough notes to cover full change.");
+    if (change === 0) {
+      const updated = { ...notes };
+      updated[given] = (updated[given] || 0) + 1;
+      setNotes(updated);
+      setFinalResult({ withdrawn: {}, remaining: 0 });
+      return;
     }
 
-    setPendingResult({ withdrawn, remaining });
-    setFinalResult(undefined);
-  };
+    const { withdrawn, remaining } = withdrawAmount(change, notes);
 
-  const handleSettlement = () => {
-    if (!pendingResult) {
-      alert("Please click Calculate first.");
+    if (remaining > 0) {
+      alert("Cannot return exact change with available notes.");
       return;
     }
 
     const updated = { ...notes };
-    Object.entries(pendingResult.withdrawn).forEach(([n, q]) => {
+
+    updated[given] = (updated[given] || 0) + 1;
+
+    Object.entries(withdrawn).forEach(([n, q]) => {
       const key = Number(n);
       updated[key] = Math.max(0, (updated[key] || 0) - q);
+      if (updated[key] === 0) {
+        delete updated[key];
+      }
     });
 
     setNotes(updated);
-    setFinalResult(pendingResult);
-    setPendingResult(undefined);
-    localStorage.setItem("notes", JSON.stringify(updated));
+    setFinalResult({ withdrawn, remaining: 0 });
   };
-
-  const hasPending =
-    pendingResult && Object.values(pendingResult.withdrawn).some((q) => q > 0);
 
   return (
     <div className='card'>
@@ -114,21 +102,10 @@ export default function BillingSystem({ notes, setNotes }: Props) {
                 )
               }
             />
-            <button className='btn accent' onClick={handleCalculate}>
-              Calculate
+            <button className='btn success' onClick={handleSettlement}>
+              Settlement
             </button>
           </div>
-
-          <div className='blankBox' aria-hidden='true'></div>
-
-          <button
-            className='btn success'
-            onClick={handleSettlement}
-            disabled={!hasPending}
-            title={!hasPending ? "Calculate first" : "Apply and show notes"}
-          >
-            Settlement
-          </button>
 
           {finalResult && (
             <div className='result'>

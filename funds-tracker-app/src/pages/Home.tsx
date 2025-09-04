@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-
 import BillingSystem from "../components/BillingSystem";
 import NotesManager from "../components/NotesManager";
 import type { Notes } from "../types";
 import { loadNotes, saveNotes } from "../utils/helper/storage";
 
 export default function Home() {
-  const [notes, setNotes] = useState<Notes>({});
-
-  useEffect(() => {
-    setNotes(loadNotes());
-  }, []);
+  const [notes, setNotes] = useState<Notes>(() => loadNotes());
 
   useEffect(() => {
     saveNotes(notes);

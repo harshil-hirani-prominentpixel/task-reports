@@ -10,7 +10,9 @@ export function loadNotes(): Notes {
     const normalized: Notes = {};
     Object.entries(parsed).forEach(([k, v]) => {
       const n = Number(k);
-      if (Number.isFinite(n) && Number.isFinite(v) && v > 0) normalized[n] = v;
+      if (Number.isFinite(n) && Number.isFinite(v) && v > 0) {
+        normalized[n] = v;
+      }
     });
     return normalized;
   } catch {
@@ -21,7 +23,7 @@ export function loadNotes(): Notes {
 export function saveNotes(notes: Notes) {
   try {
     localStorage.setItem(KEY, JSON.stringify(notes));
-  } catch {
-    console.log("Please try again!, Not save the notes.");
+  } catch (err) {
+    console.error("Error saving notes:", err);
   }
 }
