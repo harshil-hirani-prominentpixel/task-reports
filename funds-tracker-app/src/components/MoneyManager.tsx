@@ -6,7 +6,7 @@ interface Props {
   setNotes: React.Dispatch<React.SetStateAction<Notes>>;
 }
 
-export default function NotesManager({ notes, setNotes }: Props) {
+export default function MoneyManager({ notes, setNotes }: Props) {
   const [showForm, setShowForm] = useState(false);
   const [noteValue, setNoteValue] = useState<number | "">("");
   const [quantity, setQuantity] = useState<number | "">("");
@@ -74,10 +74,10 @@ export default function NotesManager({ notes, setNotes }: Props) {
 
   return (
     <div className='card'>
-      <h2 className='title'>Notes Manager</h2>
+      <h2 className='title'>Money Manager</h2>
 
       <button className='btn primary' onClick={() => setShowForm((s) => !s)}>
-        {showForm ? "Close" : "Add Notes"}
+        {showForm ? "Close" : "Add Rupees"}
       </button>
 
       {showForm && (
@@ -106,9 +106,9 @@ export default function NotesManager({ notes, setNotes }: Props) {
         </div>
       )}
 
-      <h3 className='subtitle'>All Notes & Quantities</h3>
+      <h3 className='subtitle'>Rupees & Quantities</h3>
       {sorted.length === 0 ? (
-        <p className='muted'>No notes yet. Click “Add Notes”.</p>
+        <p className='muted'>No rupees yet. Click “Add Rupees.</p>
       ) : (
         <ul className='list'>
           {sorted.map((n) => (

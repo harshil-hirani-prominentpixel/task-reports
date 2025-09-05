@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BillingSystem from "../components/BillingSystem";
-import NotesManager from "../components/NotesManager";
+import MoneyManager from "../components/MoneyManager";
 import type { Notes } from "../types";
 import { loadNotes, saveNotes } from "../utils/helper/storage";
 
@@ -18,7 +18,7 @@ export default function Home() {
       </section>
 
       <section className='rightPane'>
-        <NotesManager notes={notes} setNotes={setNotes} />
+        <MoneyManager notes={notes} setNotes={setNotes} />
       </section>
     </div>
   );
