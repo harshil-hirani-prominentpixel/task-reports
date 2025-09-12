@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1757671015061,
+    "email": "admin@gmail.com",
+    "password": "Admin@123",
+    "role": "admin",
+    "isLoggedIn": false
+  },
+  {
+    "id": 1757671015065,
+    "email": "maulik@gmail.com",
+    "password": "Maulik@123",
+    "role": "user",
+    "isLoggedIn": false
+  },
+  {
+    "id": 1757674569977,
+    "email": "harshil@gmail.com",
+    "password": "Harshil@123",
+    "role": "user",
+    "isLoggedIn": false
+  },
+  {
+    "id": 1757675903397,
+    "email": "user@gmail.com",
+    "password": "User@123",
+    "role": "user",
+    "isLoggedIn": false
+  },
+  {
+    "id": 1757676865939,
+    "email": "newUser@gmail.com",
+    "password": "NewUser@123",
+    "role": "user",
+    "isLoggedIn": false
+  }
+]
