@@ -24,7 +24,7 @@ export const addUser = (
   if (!email.endsWith("@gmail.com"))
     throw new Error("Only Gmail accounts allowed");
 
-  const exists = users.find((u) => u.email === email);
+  const exists = users.find((user) => user.email === email);
   if (exists)
     throw new Error("User already exists");
 
@@ -51,7 +51,7 @@ export const signIn = (email: string, password: string): User => {
   const users = getUsers();
 
   const userIndex = users.findIndex(
-    (u) => u.email === email && u.password === password
+    (user) => user.email === email && user.password === password
   );
 
   if (userIndex === -1)
@@ -69,11 +69,10 @@ export const signIn = (email: string, password: string): User => {
 
 export const signOut = (email: string): User => {
   const users = getUsers();
-  const userIndex = users.findIndex((u) => u.email === email);
+  const userIndex = users.findIndex((user) => user.email === email);
   if (userIndex === -1)
     throw new Error("User not found");
 
-  
 
   users[userIndex].isLoggedIn = false;
   saveUsers(users);
@@ -84,6 +83,6 @@ export const signOut = (email: string): User => {
 
 export const isLoggedIn = (email: string): boolean => {
   const users = getUsers();
-  const user = users.find((u) => u.email === email);
+  const user = users.find((user) => user.email === email);
   return !!user?.isLoggedIn;
 };
