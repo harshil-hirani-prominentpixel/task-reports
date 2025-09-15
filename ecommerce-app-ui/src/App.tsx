@@ -1,17 +1,31 @@
-import Product from './components/client/Product';
-import data from './data/data';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import './App.css'
+import UserLayout from "./layout/UserLayout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
-    {data.map((product)=>{
-      return <Product Product={product} key={product.id} />;
-    })}
-      
-    </>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<UserLayout />}>
+          <Route index element={<Home />} />
+          <Route path='about' element={<About />} />
+          <Route path='shop' element={<Shop />} />
+          <Route path='cart' element={<Cart />} />
+          <Route path='checkout' element={<Checkout />} />
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;

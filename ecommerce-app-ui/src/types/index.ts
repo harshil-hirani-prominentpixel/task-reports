@@ -1,10 +1,11 @@
-export interface IProduct{
-    id : number;
-    name : string ;
-    category : string;
-    price : number;
-    quantity: number;
-    inStock : boolean;
-    description : string;
-    image : string;
-}
+export type ProductCardProps = {
+  id?: number;
+  image: string;
+  title: string;
+  subtitle: string;
+  price: number;
+  oldPrice?: number;
+  rating: number;
+  reviews: number;
+  isNew?: boolean;
+};
