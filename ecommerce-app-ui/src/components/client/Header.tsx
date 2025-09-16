@@ -26,10 +26,17 @@ const Header: React.FC = () => {
           <NavLink to='/cart' className={linkClass}>
             Cart
           </NavLink>
-          <NavLink to='/login' className='hover:text-white hover:bg-black rounded-xl border-2 p-2'>
+          
+          <NavLink
+            to='/login'
+            className='hover:text-white hover:bg-black rounded-xl border-2 p-2'
+          >
             Login
           </NavLink>
-          <NavLink to='/register' className='hover:text-white hover:bg-black rounded-xl border-2 p-2'>
+          <NavLink
+            to='/register'
+            className='hover:text-white hover:bg-black rounded-xl border-2 p-2'
+          >
             Register
           </NavLink>
         </nav>

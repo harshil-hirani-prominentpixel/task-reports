@@ -1,10 +1,11 @@
 import React from "react";
 import { Star } from "lucide-react";
+import { useCart } from "../../../context/CartContext";
 
-import type { ProductCardProps } from "../../types";
-
+import type { ProductCardProps } from "../../../types";
 
 const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   image,
   title,
   subtitle,
@@ -14,6 +15,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
   reviews,
   isNew = false,
 }) => {
+
+  const { addToCart } = useCart(); 
+
+  const handleAddToCart = () => {
+
+
+    if(!id){
+      throw new Error("Id is null");
+    }
+
+    addToCart({
+      id : id,
+      title : title,
+      image : image,
+      price : price,
+      quantity: 1,
+    });
+  };
+
   return (
     <div className='bg-white rounded-2xl shadow p-4 flex flex-col hover:shadow-lg transition'>
       <div className='relative'>
@@ -49,10 +69,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <span className='ml-1 text-gray-500'>({reviews})</span>
       </div>
 
-      <button className='text-xs text-white border border-gray-500 rounded-md py-1 bg-black hover:bg-blue-500' >
+      <button 
+        onClick={handleAddToCart}
+        className='text-xs text-white border border-gray-500 rounded-md py-1 bg-black hover:bg-blue-500'
+      >
         Add to Cart
       </button>
     </div>
+
   );
 };
 

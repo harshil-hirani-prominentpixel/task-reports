@@ -1,4 +1,4 @@
-import ProductGrid from "../components/client/ProductGrid";
+import ProductGrid from "../components/client/Product/ProductGrid";
 
 const Shop = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 
 import ProductCard from './ProductCard';
-import data from "../../data/data";
+import data from "../../../data/data";
 
 const ProductGrid: React.FC = () => {
   return (

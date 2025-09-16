@@ -5,7 +5,7 @@ const CartEmpty: React.FC = () => {
   return (
     <div className='flex flex-col items-center justify-center py-20 text-center'>
       <img
-        src='/images/empty-cart.png'
+        src='/assets/images/empty-cart.png'
         alt='Empty Cart'
         className='w-40 h-40 mb-6 opacity-70'
       />

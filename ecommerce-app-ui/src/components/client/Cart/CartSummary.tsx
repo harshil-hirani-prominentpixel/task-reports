@@ -1,12 +1,6 @@
 import React from "react";
 
-type CartSummaryProps = {
-  subtotal: number;
-  discount?: number;
-  shipping?: string | number;
-  total: number;
-  onCheckout: () => void;
-};
+import type { CartSummaryProps } from "../../../types";
 
 const CartSummary: React.FC<CartSummaryProps> = ({
   subtotal,
@@ -25,7 +19,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
           <span>₹ {subtotal}</span>
         </div>
         {discount && (
-          <div className='flex justify-between text-green-600'>
+          <div className='flex justify-between text-blue-600'>
             <span>Discount</span>
             <span>- ₹ {discount}</span>
           </div>

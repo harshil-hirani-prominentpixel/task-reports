@@ -1,20 +1,11 @@
 import React from "react";
 
-type CartItemProps = {
-  image: string;
-  title: string;
-  color?: string;
-  price: number;
-  oldPrice?: number;
-  quantity: number;
-  onRemove: () => void;
-  onQuantityChange: (newQty: number) => void;
-};
+import type { CartItemProps } from "../../../types";
 
 const CartItem: React.FC<CartItemProps> = ({
+  id,
   image,
   title,
-  color,
   price,
   oldPrice,
   quantity,
@@ -27,11 +18,11 @@ const CartItem: React.FC<CartItemProps> = ({
 
       <div className='flex-1'>
         <h3 className='font-semibold'>{title}</h3>
-        {color && <p className='text-sm text-gray-500'>Color: {color}</p>}
+        {id && <p className='text-sm text-gray-500'>ProductId: {id}</p>}
 
         <div className='flex items-center mt-2 space-x-2'>
           <button
-            onClick={() => onQuantityChange(quantity - 1)}
+            onClick={() => quantity === 1 ?  onRemove() : onQuantityChange(quantity - 1)}
             className='px-2 border rounded'
           >
             -
