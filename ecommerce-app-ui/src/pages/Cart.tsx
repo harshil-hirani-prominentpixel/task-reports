@@ -10,33 +10,6 @@ const Cart: React.FC = () => {
 
   const { cartItems, removeFromCart, updateQuantity } = useCart();
 
-  // const [cartItems, setCartItems] = useState([
-  //   {
-  //     id: 1,
-  //     image: "/images/dac-holster.png",
-  //     title: "Headphone Zone - DAC Holster",
-  //     color: "Black",
-  //     price: 2396,
-  //     oldPrice: 2796,
-  //     quantity: 4,
-  //   },
-  // ]);
-
-  // const handleRemove = (id: number) => {
-  //   setCartItems(cartItems.filter((item) => item.id !== id));
-  // };
-
-
-
-  // const handleQuantityChange = (id: number, newQty: number) => {
-  //   if (newQty < 1) return;
-  //   setCartItems(
-  //     cartItems.map((item) =>
-  //       item.id === id ? { ...item, quantity: newQty } : item
-  //     )
-  //   );
-  // };
-
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
