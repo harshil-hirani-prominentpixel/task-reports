@@ -3,7 +3,6 @@ import path from "path";
 import { IUser } from "../model/userModel";
 import { IPunch } from "../model/punchModel";
 
-
 const userFile = path.join(__dirname, "../../users.json");
 const punchesDir = path.join(__dirname, "../../punches/");
 
@@ -25,7 +24,6 @@ export const writeUsers = (users: IUser[]) => {
 };
 
 export const getTodayPunchFile = (): string => {
-
   const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -42,6 +40,6 @@ export const readPunches = (): IPunch[] => {
 
 export const writePunches = (punches: IPunch[]): void => {
   const filePath = getTodayPunchFile();
-  
+
   fs.writeFileSync(filePath, JSON.stringify(punches, null, 2));
 };

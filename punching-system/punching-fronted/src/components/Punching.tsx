@@ -13,8 +13,8 @@ export default function Punching() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/punch", { name });
-      setMsg(res.data.message || "Punch successful");
+      const response = await axios.post("http://localhost:5000/punch", { name });
+      setMsg(response.data.message || "Punch successful");
       setName("");
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -26,7 +26,7 @@ export default function Punching() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
+    <div style={{ padding: "250px", maxWidth: "400px", margin: "auto" }}>
       <h2>Punch System</h2>
       <input
         type='text'
@@ -41,7 +41,8 @@ export default function Punching() {
       >
         Punch
       </button>
-      {msg && <p style={{ marginTop: "10px", color: "green" }}>{msg}</p>}
+      
+      {msg && <p style={{ marginTop: "10px", color: "green" }}>{msg}</p> } 
       {error && <p style={{ marginTop: "10px", color: "red" }}>{error}</p>}
     </div>
   );
